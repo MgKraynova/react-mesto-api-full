@@ -1,0 +1,20 @@
+.header__text {
+    font-family: Inter, Arial, sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 122%;
+    text-align: right;
+    color: #FFFFFF;
+    margin-bottom: 0;
+    margin-top: 0;
+    margin-left: 0;
+    margin-right: 24px;
+}
+
+@media screen and (max-width: 520px) {
+    .header__text {
+        margin-right: 0;
+        margin-bottom: 18px;
+    }
+}
