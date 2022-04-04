@@ -100,7 +100,7 @@ class Api {
 const api = new Api({
     serverUrl: 'https://api.mesto-app.nomoredomains.work',
     headers: {
-        authorization: '061fe8f7-e35d-435e-9a0b-36d23d83d517',
+        // authorization: '061fe8f7-e35d-435e-9a0b-36d23d83d517',
         'Content-Type': 'application/json'
     }
 });
