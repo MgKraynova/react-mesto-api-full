@@ -5,14 +5,14 @@ const ValidationError = require('../errors/ValidationError');
 const ForbiddenError = require('../errors/ForbiddenError');
 
 module.exports.getAllCards = (req, res, next) => {
-  Card.find({})
+  Card.find({}).sort({ createdAt: -1 })
     .then((result) => res.send(result))
     .catch(next);
 };
 
 module.exports.createCard = (req, res, next) => {
   const { name, link } = req.body;
-
+  console.log(name, link);
   Card.create({ name, link, owner: req.user._id })
     .then((card) => {
       res.send(card);

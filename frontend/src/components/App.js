@@ -129,7 +129,7 @@ function App() {
             getContent(token)
                 .then((res) => {
                     setLoggedIn(true);
-                    setUserEmail(res.data.email);
+                    setUserEmail(res.email);
                     history.push('/');
                 })
                 .catch((err) => {
