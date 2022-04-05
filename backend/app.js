@@ -25,10 +25,12 @@ app.listen(PORT, () => {
   console.log(`Сервер запущен на порту ${PORT}`);
 });
 
-app.use(cors({
-  origin: 'https://mesto-app.nomoredomains.xyz',
-  credentials: true,
-}));
+// app.use(cors({
+//   origin: 'https://mesto-app.nomoredomains.xyz',
+//   credentials: true,
+// }));
+
+app.use(cors());
 
 app.use(requestLogger);
 

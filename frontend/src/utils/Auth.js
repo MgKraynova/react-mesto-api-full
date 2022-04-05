@@ -23,6 +23,7 @@ export function registerNewUser(email, password) {
 }
 
 export function loginUser(email, password) {
+    console.log(BASE_URL);
     return fetch(`${BASE_URL}/signin`, {
         method: 'POST',
         headers: {
