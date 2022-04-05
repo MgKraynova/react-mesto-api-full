@@ -1,4 +1,4 @@
-require('dotenv').config();
+// require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
 const { celebrate, Joi, errors } = require('celebrate');
@@ -25,10 +25,10 @@ app.listen(PORT, () => {
   console.log(`Сервер запущен на порту ${PORT}`);
 });
 
-app.use(cors({
-  origin: 'https://mesto-app.nomoredomains.xyz',
-  credentials: true,
-}));
+// app.use(cors({
+//   origin: 'https://mesto-app.nomoredomains.xyz',
+//   credentials: true,
+// }));
 
 app.use(requestLogger);
 
