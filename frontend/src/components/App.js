@@ -46,7 +46,9 @@ function App() {
 
     useEffect(() => {
         api.getUserInfo()
-            .then(setCurrentUser)
+            .then((user) => {
+                setCurrentUser(user);
+            })
             .catch(handleApiError);
     }, []);
 
@@ -141,7 +143,9 @@ function App() {
     function signOut() {
         localStorage.removeItem('token');
         setLoggedIn(false);
+        setCurrentUser({});
         setUserEmail('');
+        setCards([]);
         history.push('/sign-in');
     }
 
