@@ -6,13 +6,11 @@ const UnauthorizedError = require('../errors/UnauthorizedError');
 
 module.exports = (req, res, next) => {
   const { authorization } = req.headers;
-  console.log('req.headers', req.headers);
   if (!authorization || !authorization.startsWith('Bearer ')) {
     return next(new UnauthorizedError('Для совершения действия вы должны пройти авторизацию'));
   }
 
   const token = authorization.replace('Bearer ', '');
-  console.log('token', token);
   let payload;
 
   try {

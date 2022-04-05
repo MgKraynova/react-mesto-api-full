@@ -50,11 +50,10 @@ module.exports.createUser = (req, res, next) => {
             User.create({
               name, about, avatar, email, password: hash,
             })
-              .then(() => res.send({
-                data: {
-                  name, about, avatar, email,
-                },
-              }))
+              .then((user) => User.findOne({ _id: user._id }))
+              .then((user) => {
+                res.send(user);
+              })
               .catch((err) => {
                 if (err.name === 'ValidationError') {
                   next(new ValidationError('Ошибка. При создании пользователя были переданы некорректные данные'));
@@ -81,7 +80,7 @@ module.exports.updateUser = (req, res, next) => {
   )
     .then((user) => {
       if (user) {
-        res.send({ data: user });
+        res.send(user);
       } else {
         next(new NotFoundError('Ошибка. Пользователь не найден, попробуйте еще раз'));
       }
@@ -106,7 +105,7 @@ module.exports.updateUserAvatar = (req, res, next) => {
   )
     .then((user) => {
       if (user) {
-        res.send({ data: user });
+        res.send(user);
       } else {
         next(new NotFoundError('Ошибка. Пользователь не найден, попробуйте еще раз'));
       }
@@ -143,7 +142,7 @@ module.exports.getCurrentUserInfo = (req, res, next) => {
   User.findOne({ _id: userId })
     .then((user) => {
       if (user) {
-        res.send({ data: user });
+        res.send(user);
       } else {
         next(new NotFoundError('Ошибка. Пользователь не найден, попробуйте еще раз'));
       }
