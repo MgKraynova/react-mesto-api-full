@@ -45,18 +45,24 @@ function App() {
 
 
     useEffect(() => {
-        api.getUserInfo()
-            .then((user) => {
-                setCurrentUser(user);
-            })
-            .catch(handleApiError);
-    }, []);
+        if (!loggedIn) {
+            return;
+        }
 
-    useEffect(() => {
+        api.updateTokenInHeaders();
+
+        api.getUserInfo()
+            .then(setCurrentUser)
+            .catch((err) => {
+                handleApiError(err);
+            });
+
         api.getInitialCards()
             .then(setCards)
-            .catch(handleApiError);
-    }, []);
+            .catch((err) => {
+                handleApiError(err);
+            });
+    }, [loggedIn]);
 
     function handleDeleteButtonClick(card) {
         setSelectedCard(card);
@@ -109,6 +115,7 @@ function App() {
     }
 
     function handleLoginUser(email, password) {
+        setIsLoading(true);
 
         loginUser(email, password)
             .then((res) => {
@@ -116,12 +123,15 @@ function App() {
                     localStorage.setItem('token', res.token);
                     setLoggedIn(true);
                     setUserEmail(email);
-                    history.push('/');
                 }
             })
             .catch((err) => {
                 setIsFailInfoTooltipOpened(true);
                 handleApiError(err);
+            })
+            .finally(() => {
+                setIsLoading(false);
+                history.push('/');
             })
     }
 
@@ -239,7 +249,7 @@ function App() {
                     exact path="/"
                     loggedIn={loggedIn}
                     component={Main}
-
+                    replace
                     onEditProfile={handleEditProfileClick} onAddPlace={handleAddPlaceClick}
                     onEditAvatar={handleEditAvatarClick}
                     onCardClick={handleCardClick}
@@ -247,14 +257,14 @@ function App() {
                     onCardLike={handleCardLike}
                     cards={cards}
                 />
-                <Route path="/sign-up">
+                <Route path="/sign-up" replace>
                     <Register onRegisterUser={handleRegisterUser}/>
                 </Route>
-                <Route path="/sign-in">
-                    <Login onLoginUser={handleLoginUser}/>
+                <Route path="/sign-in" replace>
+                    <Login isLoading={isLoading} onLoginUser={handleLoginUser}/>
                 </Route>
                 <Route>
-                    <Redirect to="/"/>
+                    <Redirect to="/" replace/>
                 </Route>
             </Switch>
 

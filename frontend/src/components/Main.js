@@ -1,7 +1,8 @@
-import React, {useContext} from "react";
+import React, {useContext, useEffect} from "react";
 import Card from "./Card";
 import CurrentUserContext from "../contexts/CurrentUserContext";
 import Footer from "./Footer";
+import api from "../utils/Api";
 
 function Main(props) {
 

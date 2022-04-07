@@ -47,7 +47,7 @@ function Login(props) {
                         onChange={handlePasswordInputChange}
                     />
                 </fieldset>
-                <button type="submit" className="auth__button">Войти</button>
+                <button type="submit" className="auth__button">{props.isLoading ? 'Вход...' : 'Войти'}</button>
             </form>
         </div>
     )

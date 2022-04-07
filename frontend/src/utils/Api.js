@@ -95,6 +95,13 @@ class Api {
         })
             .then(this._checkResult);
     }
+
+    updateTokenInHeaders() {
+        this._headers = {
+            'Authorization': `Bearer ${localStorage.getItem('token')}`,
+            'Content-Type': 'application/json'
+        }
+    }
 }
 
 const api = new Api({
